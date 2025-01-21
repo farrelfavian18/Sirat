@@ -6,7 +6,7 @@ use App\Http\Controllers\{
     FasilitasController,
     ProfileController,
     JamaahController,
-    PerusahaanCOntroller,
+    PerusahaanController,
     PaketController,
     PembayaranController,
     ReferralController,
