@@ -37,32 +37,32 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($data_perusahaan as $perusahaan)
+                @forelse($perusahaan as $item)
                 <tr>
-                    <td>{{ $perusahaan->id }}</td>
-                    <td>{{ $perusahaan->nama_cabang }}</td>
-                    <td>{{ $perusahaan->kota_kabupaten }}</td>
-                    <td>{{ $perusahaan->alamat }}</td>
-                    <td>{{ $perusahaan->nama_pimpinan }}</td>
-                    <td>{{ $perusahaan->nib_cabang }}</td>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->nama_cabang }}</td>
+                    <td>{{ $item->kota_kabupaten }}</td>
+                    <td>{{ $item->alamat }}</td>
+                    <td>{{ $item->nama_pimpinan }}</td>
+                    <td>{{ $item->nib_cabang }}</td>
                     <td>
-                        @if($perusahaan->pdf_nib)
-                        <a href="{{ asset('storage/' . $perusahaan->pdf_nib) }}" target="_blank">View</a>
+                        @if($item->pdf_nib)
+                        <a href="{{ asset('storage/' . $item->pdf_nib) }}" target="_blank">View</a>
                         @else
                         <span class="text-muted">-</span>
                         @endif
                     </td>
                     <td>
-                        @if($perusahaan->pdf_akta_cabang)
-                        <a href="{{ asset('storage/' . $perusahaan->pdf_akta_cabang) }}" target="_blank">View</a>
+                        @if($item->pdf_akta_cabang)
+                        <a href="{{ asset('storage/' . $item->pdf_akta_cabang) }}" target="_blank">View</a>
                         @else
                         <span class="text-muted">-</span>
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('perusahaan.edit', $perusahaan->id) }}"
+                        <a href="{{ route('perusahaan.edit', $item->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('perusahaan.destroy', $perusahaan->id) }}" method="POST" class="d-inline"
+                        <form action="{{ route('perusahaan.destroy', $item->id) }}" method="POST" class="d-inline"
                             onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?');">
                             @csrf
                             @method('DELETE')

@@ -73,7 +73,7 @@ class PerusahaanController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Perusahaan $perusahaan, $id)
+    public function edit($id)
     {
         $perusahaan = Perusahaan::find($id);
 
@@ -87,7 +87,7 @@ class PerusahaanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Perusahaan $perusahaan, $id)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'nama_cabang' => 'required',

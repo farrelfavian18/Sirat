@@ -36,7 +36,8 @@
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-        <div class="mb-3">
+
+        {{-- <div class="mb-3">
             <label for="id_karyawan" class="form-label">Karyawan (Referal)</label>
             <select name="id_karyawan" class="form-control" id="id_karyawan">
                 <option value="" disabled selected>Pilih Karyawan</option>
@@ -49,7 +50,8 @@
             @error('id_karyawan')
             <div class="text-danger">{{ $message }}</div>
             @enderror
-        </div>
+        </div> --}}
+
         <div class="mb-3">
             <label for="code_referals" class="form-label">Nama Karyawan</label>
             <input type="text" name="code_referals" class="form-control" id="code_referals" value="{{ old('code_referals') }}" readonly>
