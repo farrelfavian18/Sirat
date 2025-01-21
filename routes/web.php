@@ -11,6 +11,7 @@ use App\Http\Controllers\{
     PembayaranController,
     ReferralController,
     SuratController,
+    UserController
 };
 
 Route::get('/', function () {
@@ -37,6 +38,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('surat', SuratController::class);
     Route::resource('perusahaan', PerusahaanController::class);
     Route::resource('fasilitas', FasilitasController::class);
+    Route::resource('user', UserController::class);
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

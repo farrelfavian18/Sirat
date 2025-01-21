@@ -118,9 +118,9 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ url('/karyawan') }}" class="nav-link">
+                            <a href="{{ url('/user') }}" class="nav-link">
                                 <i class="nav-icon fas fa-user-tie"></i>
-                                <p>Karyawan</p>
+                                <p>User/Karyawan</p>
                             </a>
                         </li>
                         <li class="nav-item">
