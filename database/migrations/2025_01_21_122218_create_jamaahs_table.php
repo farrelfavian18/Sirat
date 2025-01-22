@@ -17,8 +17,8 @@ return new class extends Migration
             $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade')->onUpdate('cascade')->default(1);
             $table->unsignedBigInteger('id_perusahaan');
             $table->foreign('id_perusahaan')->references('id')->on('perusahaans')->onDelete('cascade')->onUpdate('cascade')->default(1);
-            $table->unsignedBigInteger('id_user');
-            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade')->default(1);
+            // $table->unsignedBigInteger('id_user');
+            // $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade')->default(1);
             $table->string('nama_jamaah')->nullable();
             $table->string('alamat')->nullable();
             $table->string('kartu_keluarga')->nullable();

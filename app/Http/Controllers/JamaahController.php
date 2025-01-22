@@ -38,17 +38,16 @@ class JamaahController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_paket' => 'required|exists:pakets,id',
-            'id_perusahaan' => 'required|exists:perusahaans,id',
-            'id_user' => 'nullable|exists:karyawans,id',
-            'nama_jamaah' => 'required|string|max:255',
-            'alamat' => 'required|string',
-            'kartu_keluarga' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
-            'ktp' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'id_paket' => 'required',
+            'id_perusahaan' => 'required',
+            'nama_jamaah' => 'required',
+            'alamat' => 'required',
+            'kartu_keluarga' => 'required',
+            'ktp' => 'required|file|mimes:pdf,jpg,jpeg,png',
             'no_telpon' => 'required|string|max:15',
-            'surat_kesehatan' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
-            'visa' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
-            'surat_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'surat_kesehatan' => 'required|file|mimes:pdf,jpg,jpeg,png',
+            'visa' => 'required|file|mimes:pdf,jpg,jpeg,png',
+            'surat_pendukung' => 'required|file|mimes:pdf,jpg,jpeg,png',
         ]);
 
         $data = $request->all();
@@ -59,13 +58,13 @@ class JamaahController extends Controller
                 $data[$fileField] = $request->file($fileField)->store('jamaah_documents', 'public');
             }
         }
-        if ($request->id_user) {
-            $referral = Referral::firstOrCreate(
-                ['id_karyawans' => $request->id_user],
-                ['total_referals' => 0]
-            );
-            $referral->increment('total_referals');
-        }
+        // if ($request->id_user) {
+        //     $referral = Referral::firstOrCreate(
+        //         ['id_karyawans' => $request->id_user],
+        //         ['total_referals' => 0]
+        //     );
+        //     $referral->increment('total_referals');
+        // }
 
         Jamaah::create($data);
 

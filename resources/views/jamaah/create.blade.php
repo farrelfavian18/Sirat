@@ -23,6 +23,13 @@
             @enderror
         </div>
         <div class="mb-3">
+            <label for="no_telpon" class="form-label">No Telpon</label>
+            <input type="number" name="no_telpon" class="form-control" id="no_telpon" required>
+            @error('no_telpon')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="mb-3">
             <label for="id_paket" class="form-label">Paket</label>
             <select name="id_paket" class="form-control" id="id_paket" required>
                 <option value="" disabled selected>Pilih Paket</option>
@@ -36,12 +43,25 @@
             <div class="text-danger">{{ $message }}</div>
             @enderror
         </div>
-
-        {{-- <div class="mb-3">
-            <label for="id_karyawan" class="form-label">Karyawan (Referal)</label>
-            <select name="id_karyawan" class="form-control" id="id_karyawan">
-                <option value="" disabled selected>Pilih Karyawan</option>
-                @foreach($karyawans as $karyawan)
+        <div class="mb-3">
+            <label for="id_perusahaan" class="form-label">Cabang</label>
+            <select name="id_perusahaan" class="form-control" id="id_perusahaan" required>
+                <option value="" disabled selected>Pilih Perusahaan</option>
+                @foreach($perusahaans as $item)
+                <option value="{{ $item->id }}" {{ old('id_perusahaan')==$item->id ? 'selected' : '' }}>
+                    {{ $item->nama_cabang }}
+                </option>
+                @endforeach
+            </select>
+            @error('id_paket')
+            <div class="text-danger">{{ $message }}</div>
+            @enderror
+        </div>
+        {{--<div class="mb-3">
+            <label for="id_user" class="form-label">Karyawan\User (Referal)</label>
+            <select name="id_user" class="form-control" id="id_user">
+                <option value="{{$user = Auth::user()->id}}" disabled-selected option>
+                @foreach($user as $karyawan)
                 <option value="{{ $karyawan->id }}" data-referal="{{ $karyawan->username }}" {{ old('id_karyawan')==$karyawan->id ? 'selected' : '' }}>
                     {{ $karyawan->nama }}
                 </option>
@@ -52,13 +72,14 @@
             @enderror
         </div> --}}
 
-        <div class="mb-3">
-            <label for="code_referals" class="form-label">Nama Karyawan</label>
-            <input type="text" name="code_referals" class="form-control" id="code_referals" value="{{ old('code_referals') }}" readonly>
+        {{--<div class="mb-3">
+            <label for="id_user" class="form-label">Nama Karyawan</label>
+            <input type="text" name="id_user" class="form-control" id="id_user" value="{{$user = Auth::user()->name}}" readonly>
             @error('code_referals')
             <div class="text-danger">{{ $message }}</div>
             @enderror
-        </div>
+        </div> --}}
+        
         <!-- File Uploads -->
         <div class="mb-3">
             <label for="kartu_keluarga" class="form-label">Kartu Keluarga</label>
