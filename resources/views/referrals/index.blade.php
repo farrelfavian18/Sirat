@@ -1,25 +1,38 @@
-{{-- @extends('layouts.app') --}}
 @extends('master.master')
 
 @section('content')
 <div class="container">
     <h1>Daftar Referral</h1>
+    <a href="{{ route('referral.create') }}" class="btn btn-success mb-3">Tambah Referral</a>
     <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Nama Karyawan</th>
+                <th>Nama Jamaah</th>
                 <th>Total Referal</th>
+                <th>Status</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
             @forelse($referrals as $referral)
             <tr>
-                <td>{{ $referral->karyawan->nama ?? 'Tidak ada data' }}</td>
+                <td>{{ $referral->user->nama ?? 'Tidak ada data' }}</td>
+                <td>{{ $referral->jamaah->nama ?? 'Tidak ada data' }}</td>
                 <td>{{ $referral->total_referals }}</td>
+                <td>{{ $referral->status }}</td>
+                <td>
+                    <a href="{{ route('referral.edit', $referral->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('referral.destroy', $referral->id) }}" method="POST" style="display: inline;">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus referral ini?')">Delete</button>
+                    </form>
+                </td>
             </tr>
             @empty
             <tr>
-                <td colspan="2">Tidak ada data referral.</td>
+                <td colspan="5">Tidak ada data referral.</td>
             </tr>
             @endforelse
         </tbody>

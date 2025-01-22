@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('referrals', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_jamaahs')->nullable()->constrained('jamaahs')->onDelete('cascade');
-            $table->foreignId('id_users')->nullable()->constrained('users')->onDelete('cascade');
-            $table->string('total_referals')->nullable();
+            $table->foreignId('id_jamaah')->nullable()->constrained('jamaahs')->onDelete('cascade');
+            $table->foreignId('id_user')->nullable()->constrained('users')->onDelete('cascade');
+            $table->unsignedInteger('total_referals')->default(0)->change();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }
