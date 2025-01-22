@@ -24,4 +24,9 @@ class Paket extends Model
         return $this->hasMany(Jamaah::class, 'id_paket');
     }
 
+    public function fasilitas()
+    {
+        return $this->hasMany(Fasilitas::class, 'id_paket');
+    }
+
 }

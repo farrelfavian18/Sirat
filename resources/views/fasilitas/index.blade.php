@@ -15,7 +15,6 @@
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nomor Paket</th>
                 <th>Nama Paket</th>
                 <th>Jenis Paket</th>
                 <th>Aksi</th>
@@ -25,7 +24,6 @@
             @forelse($fasilitas as $key => $item)
             <tr>
                 <td>{{ $key + 1 }}</td>
-                <td>{{ $item->paket->nomor_paket ?? '-' }}</td>
                 <td>{{ $item->paket->nama_paket ?? '-' }}</td>
                 <td>{{ $item->paket->jenis_paket ?? '-' }}</td>
                 <td>

@@ -16,9 +16,9 @@ class Perusahaan extends Model
         'pdf_akta_cabang',
     ];
 
-    public function karyawans()
+    public function users()
     {
-        return $this->hasMany(Karyawan::class, 'cabang_id');
+        return $this->hasMany(User::class, 'cabang_id');
         // return $this->hasOne(Karyawan::class, 'cabang_id','id');
     }
 

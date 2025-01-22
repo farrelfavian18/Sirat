@@ -39,7 +39,7 @@ class PaketController extends Controller
             'harga' => 'required|numeric',
             'pesawat' => 'required|string|max:255',
             'total_seat' => 'required|numeric',
-            'jenis_paket' => 'required|boolean',
+            'jenis_paket' => 'required|string|max:255',
         ]);
 
         Paket::create($validated);

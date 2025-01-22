@@ -11,7 +11,7 @@
         @csrf
         <div class="mb-3">
             <label for="id_data_jamaahs" class="form-label">Nama Jamaah</label>
-            <select name="id_data_jamaahs" id="id_data_jamaahs" class="form-control" required>
+            <select name="id_jamaah" id="id_jamaah" class="form-control" required>
                 @foreach($jamaahs as $jamaah)
                 <option value="{{ $jamaah->id }}">{{ $jamaah->nama_jamaah }}</option>
                 @endforeach

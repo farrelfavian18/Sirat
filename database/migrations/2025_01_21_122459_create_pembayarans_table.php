@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('pembayarans', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_jamaahs')->nullable()->constrained('jamaahs')->onDelete('cascade');
+            // $table->foreignId('id_jamaah')->nullable()->constrained('jamaah')->onDelete('cascade');
+            $table->unsignedBigInteger('id_jamaah');
+            $table->foreign('id_jamaah')->references('id')->on('jamaahs')->onDelete('cascade')->onUpdate('cascade')->default(1);
             $table->date('tanggal_pembayaran');
             $table->integer('jumlah_pembayaran');
             $table->string('keterangan');

@@ -29,4 +29,9 @@ class Jamaah extends Model
     {
         return $this->belongsTo(Perusahaan::class, 'id_perusahaan');
     }
+    
+    public function pembayarans()
+    {
+        return $this->hasMany(Pembayaran::class, 'id_jamaah');
+    }
 }

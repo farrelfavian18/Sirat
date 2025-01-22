@@ -14,7 +14,7 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $pembayarans = Pembayaran::with('jamaah')->get();
+        $pembayarans = Pembayaran::with('jamaahs')->get();
         return view('pembayaran.index', compact('pembayarans'));
     }
 
@@ -32,21 +32,23 @@ class PembayaranController extends Controller
      */
     public function store(Request $request)
     {
-        $validated = $request->validate([
-            'id_data_jamaahs' => 'required|exists:jamaahs,id',
+        $request->validate([
+            'id_jamaah' => 'required',
             'tanggal_pembayaran' => 'required|date',
-            'jumlah_pembayaran' => 'required|integer|min:0',
+            'jumlah_pembayaran' => 'required|numeric',
             'keterangan' => 'required|string',
             'penerima' => 'required|string',
-            'bukti_pembayaran' => 'nullable|file|mimes:jpeg,png,pdf|max:2048',
+            'bukti_pembayaran' => 'required|file|mimes:jpeg,png,pdf',
         ]);
+
+        $data = $request->all();
 
         // Simpan file jika ada
         if ($request->hasFile('bukti_pembayaran')) {
-            $validated['bukti_pembayaran'] = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
+            $data['bukti_pembayaran'] = $request->file('bukti_pembayaran')->store('bukti_pembayaran', 'public');
         }
 
-        Pembayaran::create($validated);
+        Pembayaran::create($data);
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil ditambahkan.');
     }
@@ -76,7 +78,7 @@ class PembayaranController extends Controller
     public function update(Request $request, Pembayaran $pembayaran, $id)
     {
         $validated = $request->validate([
-            'id_data_jamaahs' => 'required|exists:jamaahs,id',
+            'id_jamaahs' => 'required|exists:jamaahs,id',
             'tanggal_pembayaran' => 'required|date',
             'jumlah_pembayaran' => 'required|integer|min:0',
             'keterangan' => 'required|string',

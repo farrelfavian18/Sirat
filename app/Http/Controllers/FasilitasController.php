@@ -83,15 +83,15 @@ class FasilitasController extends Controller
      */
     public function update(Request $request, Fasilitas $fasilitas)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'id_paket' => 'required|exists:pakets,id',
             'peralatan' => 'required|string|max:255',
             'keterangan' => 'nullable|string|max:255',
         ]);
 
 
-        $fasilitas = Fasilitas::findOrFail($fasilitas);
-        $fasilitas->update($validatedData);
+        Fasilitas::where('id', $fasilitas->id)->update($validated);
+
 
         return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui.');
     }
