@@ -46,7 +46,7 @@ class ReferralController extends Controller
         'id_user' => $validated['id_user'],
         'id_jamaah' => $validated['id_jamaah'],
         'status' => $validated['status'],
-        'total_referal' => 1, // Default to 1 for a new referral
+        'total_referals' => 1, // Default to 1 for a new referral
     ]);
 
     // Update total_referals untuk karyawan

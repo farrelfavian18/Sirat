@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1>Edit Referral</h1>
-    <form action="{{ route('referral.update', $referral->id) }}" method="POST">
+    <form action="{{ route('referrals.update', $referral->id) }}" method="POST">
         @csrf
         @method('PUT')
         <div class="form-group">

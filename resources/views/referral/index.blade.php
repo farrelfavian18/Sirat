@@ -15,15 +15,15 @@
             </tr>
         </thead>
         <tbody>
-            @forelse($referrals as $referral)
+            @forelse($referral as $referrals)
             <tr>
                 <td>{{ $referral->user->nama ?? 'Tidak ada data' }}</td>
                 <td>{{ $referral->jamaah->nama ?? 'Tidak ada data' }}</td>
                 <td>{{ $referral->total_referals }}</td>
                 <td>{{ $referral->status }}</td>
                 <td>
-                    <a href="{{ route('referral.edit', $referral->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                    <form action="{{ route('referral.destroy', $referral->id) }}" method="POST" style="display: inline;">
+                    <a href="{{ route('referral.edit', $referrals->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                    <form action="{{ route('referral.destroy', $referrals->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus referral ini?')">Delete</button>
