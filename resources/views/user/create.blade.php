@@ -7,27 +7,32 @@
             <h2 class="text-center">Tambah Data Karyawan</h2>
         </div>
     </div>
-    <form method="POST" action="{{ route('karyawan.store') }}" enctype="multipart/form-data" >
+    <form action="{{ route('user.store') }}" method="POST" enctype="multipart/form-data" >
         @csrf
-        <div class="mb-3">
+        <!-- <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
             <input type="text" name="name" class="form-control" id="name" required>
+        </div> -->
+        <div class="form-group">
+            <label for="name">Nama Akun</label>
+            <input type="text" id="" name="name" class="form-control" @error('name') is-invalid @enderror"
+                placeholder="contoh: Billy Fernandes">
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" class="form-select" required>
-                <option value="superadmin">Karyawan Pusat</option>
-                <option value="admin">Pimpinan Cabang</option>
-                <option value="user">Karyawan Cabang</option>
+                <option value="superadmin">Superadmin</option>
+                <option value="admin">Admin</option>
+                <option value="user">User</option>
             </select>
         </div>
         <div class="form-group">
-            <label for="cabang_id">Perusahaan / Cabang</label>
-            <select class="form-control select2 @error('cabang_id') is-invalid @enderror" style="width: 100%;"
-                name="cabang_id" id="cabang_id">
+            <label for="id_cabang">Perusahaan / Cabang</label>
+            <select class="form-control select2 @error('id_cabang') is-invalid @enderror" style="width: 100%;"
+                name="id_cabang" id="id_cabang">
                 <option value="" selected disabled>Pilih Cabang</option>
                 @foreach ($perusahaan as $item)
-                <option value="{{ $item->id }}" data-email="{{ $item->cabang_id }}">{{ $item->nama_cabang }}
+                <option value="{{ $item->id }}" data-email="{{ $item->id_cabang }}">{{ $item->nama_cabang }}
                 </option>
                 {{-- <option value="{{ $item->id }}">{{ $item->name }}
                 </option> --}}
@@ -43,7 +48,7 @@
         </div>
         <div class="mb-3">
             <label for="no_wa" class="form-label">Nomor WhatsApp</label>
-            <input type="number" name="no_wa" class="form-control" id="no_wa">
+            <input type="text" name="no_wa" class="form-control" id="no_wa">
         </div>
         <div class="mb-3">
             <label for="alamat" class="form-label">Alamat</label>

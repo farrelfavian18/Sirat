@@ -19,7 +19,33 @@ class UserController extends Controller
     public function create()
     {
         $user = User::all();
-        return view('user.create', compact('user'));
+        $perusahaan = Perusahaan::all();
+        return view('user.create', compact('user','perusahaan'));
+    }
+
+    public function store(Request $request, User $user)
+    {
+        try {
+            $request->validate([
+                'name' => 'required',
+                'id_cabang' => 'required',
+                'email' => 'required',
+                'role' => 'required',
+                'no_wa' => 'required',
+                'alamat' => 'required',
+                // 'password' => 'required',
+                // 'password' => Hash::make($request->password),
+                
+            ]);
+            // $new_password = $request->input('password');
+            // $user->password = bcrypt($new_password);
+            // $user->save();
+            $data = $request->all();
+            User::create($data);
+        } catch (\Exception $e) {
+            throw new \Exception($e->getMessage());
+        }
+        return to_route('user.index')->with('message','Data Karyawan Telah Di Update');
     }
 
     public function edit(User $user)
