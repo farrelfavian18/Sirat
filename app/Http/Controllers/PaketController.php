@@ -92,7 +92,7 @@ class PaketController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Paket $paket,$id, $fileField)
+    public function destroy($id)
     {
         $paket = Paket::findOrFail($id);
         $paket->delete();

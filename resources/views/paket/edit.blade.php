@@ -12,14 +12,14 @@
                 required>
         </div>
         <div class="form-group">
-            <label for="tanggal_keberangkatan">Tanggal Keberangkatan</label>
-            <input type="date" class="form-control" id="tanggal_keberangkatan" name="tanggal_keberangkatan"
-                value="{{ $paket->tanggal_keberangkatan }}" required>
-        </div>
-        <div class="form-group">
             <label for="tanggal_kepulangan">Tanggal Kepulangan</label>
             <input type="date" class="form-control" id="tanggal_kepulangan" name="tanggal_kepulangan"
                 value="{{ $paket->tanggal_kepulangan }}" required>
+        </div>
+        <div class="form-group">
+            <label for="tanggal_keberangkatan">Tanggal Keberangkatan</label>
+            <input type="date" class="form-control" id="tanggal_keberangkatan" name="tanggal_keberangkatan"
+                value="{{ $paket->tanggal_keberangkatan }}" required>
         </div>
         <div class="form-group">
             <label for="hotel_madinah">Hotel Madinah</label>
@@ -46,6 +46,11 @@
         <div class="form-group">
             <label for="total_seat">Total Seat</label>
             <input type="number" class="form-control" id="total_seat" name="total_seat" value="{{ $paket->total_seat }}"
+                required>
+        </div>
+        <div class="form-group">
+            <label for="total_seat">Jenis Paket</label>
+            <input type="number" class="form-control" id="jenis_paket" name="jenis_paket" value="{{ $paket->jenis_paket }}"
                 required>
         </div>
         <button type="submit" class="btn btn-primary">Update</button>
