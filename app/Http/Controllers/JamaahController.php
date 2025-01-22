@@ -82,17 +82,58 @@ class JamaahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Jamaah $jamaah, $id)
+    public function edit(Jamaah $jamaah)
     {
-        
+    $pakets = Paket::all();
+    $perusahaans = Perusahaan::all();
+    $users = User::all();
+    return view('jamaah.edit', compact('jamaah', 'pakets', 'perusahaans', 'users'));
     }
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Jamaah $jamaah)
     {
-        //
+        $request->validate([
+            'id_paket' => 'required',
+            'id_perusahaan' => 'required',
+            'nama_jamaah' => 'required',
+            'alamat' => 'required',
+            'kartu_keluarga' => 'nullable',
+            'ktp' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'no_telpon' => 'required|string|max:15',
+            'surat_kesehatan' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'visa' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+            'surat_pendukung' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
+        ]);
+
+        $jamaah = Jamaah::findOrFail($request->id);
+
+        $data = $request->all();
+
+        // Simpan file jika ada
+        foreach (['kartu_keluarga', 'ktp', 'surat_kesehatan', 'visa', 'surat_pendukung'] as $fileField) {
+            if ($request->hasFile($fileField)) {
+                if ($jamaah->$fileField) {
+                    Storage::delete('public/' . $jamaah->$fileField);
+                }
+                $data[$fileField] = $request->file($fileField)->store('jamaah_documents', 'public');
+            }
+        }
+
+        // if ($request->id_user) {
+        //     $referral = Referral::firstOrCreate(
+        //         ['id_karyawans' => $request->id_user],
+        //         ['total_referals' => 0]
+        //     );
+        //     $referral->increment('total_referals');
+        // }
+
+        $jamaah->update($data);
+
+        return redirect()->route('jamaah.index')->with('success', 'Data Jamaah berhasil diubah.');
     }
 
     /**

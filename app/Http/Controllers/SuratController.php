@@ -37,7 +37,7 @@ class SuratController extends Controller
         $request->validate([
             
             'id_perusahaan' => 'nullable|exists:data_perusahaan,id',
-            'id_user' => 'nullable|exists:user,id',
+            'id_user' => 'nullable|exists:users,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',

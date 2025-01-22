@@ -34,4 +34,9 @@ class Jamaah extends Model
     {
         return $this->hasMany(Pembayaran::class, 'id_jamaah');
     }
+
+    public function referrals()
+    {
+        return $this->hasMany(Referral::class, 'id_jamaah');
+    }
 }

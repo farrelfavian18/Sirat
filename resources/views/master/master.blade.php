@@ -102,95 +102,77 @@
                 </div>
 
                 <!-- Sidebar Menu -->
-<nav class="mt-2">
-    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" color="white">
-        <!-- Menu Dashboard -->
-        <li class="nav-item">
-            <a href="{{ url('/dashboard') }}" class="nav-link">
-                <i class="nav-icon fas fa-tachometer-alt"></i>
-                <p>Dashboard</p>
-            </a>
-        </li>
-
-        <!-- Menu Jamaah untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/jamaah') }}" class="nav-link">
-                <i class="nav-icon fas fa-users"></i>
-                <p>Jamaah</p>
-            </a>
-        </li>
-
-        <!-- Menu User/Karyawan hanya untuk superadmin dan admin -->
-        @can('superadmin') <!-- Hanya superadmin -->
-        <li class="nav-item">
-            <a href="{{ url('/user') }}" class="nav-link">
-                <i class="nav-icon fas fa-user-tie"></i>
-                <p>User/Karyawan</p>
-            </a>
-        </li>
-        @endcan
-
-        @can('admin') <!-- Hanya admin -->
-        <li class="nav-item">
-            <a href="{{ url('/user') }}" class="nav-link">
-                <i class="nav-icon fas fa-user-tie"></i>
-                <p>User/Karyawan</p>
-            </a>
-        </li>
-        @endcan
-
-        <!-- Menu Pembayaran untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/pembayaran') }}" class="nav-link">
-                <i class="nav-icon fas fa-money-check-alt"></i>
-                <p>Pembayaran</p>
-            </a>
-        </li>
-
-        <!-- Menu Paket untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/paket') }}" class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
-                <p>Paket</p>
-            </a>
-        </li>
-
-        <!-- Menu Fasilitas untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/fasilitas') }}" class="nav-link">
-                <i class="nav-icon fas fa-tree"></i>
-                <p>Fasilitas</p>
-            </a>
-        </li>
-
-        <!-- Menu Perusahaan hanya untuk superadmin -->
-        @can('superadmin') <!-- Hanya superadmin -->
-        <li class="nav-item">
-            <a href="{{ url('/perusahaan') }}" class="nav-link">
-                <i class="nav-icon fas fa-columns"></i>
-                <p>Perusahaan</p>
-            </a>
-        </li>
-        @endcan
-
-        <!-- Menu Surat untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/surat') }}" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
-                <p>Surat</p>
-            </a>
-        </li>
-
-        <!-- Menu Referral untuk semua role -->
-        <li class="nav-item">
-            <a href="{{ url('/referral') }}" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>Referals</p>
-            </a>
-        </li>
-    </ul>
-</nav>
-
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" color="white">
+                        <!-- Dashboard -->
+                        <li class="nav-item">
+                            <a href="{{ url('/dashboard') }}" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt"></i>
+                                <p>Dashboard</p>
+                            </a>
+                        </li>
+                
+                        <!-- Jamaah, Paket, Pembayaran, Fasilitas, Referral (User & Admin) -->
+                        @if(in_array(Auth::user()->role, ['user', 'admin', 'superadmin']))
+                            <li class="nav-item">
+                                <a href="{{ url('/jamaah') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-users"></i>
+                                    <p>Jamaah</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/paket') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-book"></i>
+                                    <p>Paket</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/pembayaran') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-money-check-alt"></i>
+                                    <p>Pembayaran</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/fasilitas') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-tree"></i>
+                                    <p>Fasilitas</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/referral') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-edit"></i>
+                                    <p>Referals</p>
+                                </a>
+                            </li>
+                        @endif
+                
+                        <!-- User Management & Surat (Admin & Superadmin) -->
+                        @if(in_array(Auth::user()->role, ['admin', 'superadmin']))
+                            <li class="nav-item">
+                                <a href="{{ url('/user') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-user-tie"></i>
+                                    <p>User/Karyawan</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ url('/surat') }}" class="nav-link">
+                                    <i class="nav-icon far fa-envelope"></i>
+                                    <p>Surat</p>
+                                </a>
+                            </li>
+                        @endif
+                
+                        <!-- Perusahaan (Superadmin Only) -->
+                        @if(Auth::user()->role === 'superadmin')
+                            <li class="nav-item">
+                                <a href="{{ url('/perusahaan') }}" class="nav-link">
+                                    <i class="nav-icon fas fa-columns"></i>
+                                    <p>Perusahaan</p>
+                                </a>
+                            </li>
+                        @endif
+                    </ul>
+                </nav>
             </div>
         </aside>
         <!-- /.sidebar -->
@@ -217,5 +199,4 @@
     <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
 </body>
-
 </html>

@@ -8,7 +8,7 @@ class Surat extends Model
 {
     protected $fillable = [
         'id_perusahaan',
-        'id_users',
+        'id_user',
         'keterangan',
         'dokumen_surat',
         'note',
@@ -18,8 +18,8 @@ class Surat extends Model
     {
         return $this->belongsTo(Paket::class, 'id_perusahaan');
     }
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class, 'id_users');
+        return $this->belongsTo(User::class, 'id_user');
     }
 }
