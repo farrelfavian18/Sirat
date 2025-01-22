@@ -35,8 +35,9 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_data_perusahaans' => 'nullable|exists:data_perusahaans,id',
-            'id_karyawans' => 'nullable|exists:karyawans,id',
+            
+            'id_perusahaans' => 'nullable|exists:data_perusahaans,id',
+            'id_user' => 'nullable|exists:karyawans,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',
@@ -78,8 +79,8 @@ class SuratController extends Controller
     public function update(Request $request, Surat $surat , $id)
     {
         $request->validate([
-            'id_data_perusahaans' => 'nullable|exists:data_perusahaans,id',
-            'id_karyawans' => 'nullable|exists:karyawans,id',
+            'id_perusahaans' => 'nullable|exists:data_perusahaans,id',
+            'id_users' => 'nullable|exists:karyawans,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',

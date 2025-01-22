@@ -7,21 +7,19 @@ use Illuminate\Database\Eloquent\Model;
 class Surat extends Model
 {
     protected $fillable = [
-        'id_paket',
         'id_perusahaan',
-        'nama_jamaah',
-        'kota_kabupaten',
-        'alamat',
-        'kartu_keluarga',
-        'ktp',
-        'no_telpon',
-        'surat_kesehatan',
-        'visa',
-        'surat_pendukung',
+        'id_users',
+        'keterangan',
+        'dokumen_surat',
+        'note',
     ];
 
-    public function paket()
+    public function perusahaan()
     {
-        return $this->belongsTo(Paket::class, 'id_paket');
+        return $this->belongsTo(Paket::class, 'id_perusahaan');
+    }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_users');
     }
 }
