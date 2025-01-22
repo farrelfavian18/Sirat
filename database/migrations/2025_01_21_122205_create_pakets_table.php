@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('pakets', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_perusahaan')->nullable()->constrained('perusahaans')->onDelete('cascade');
             $table->string('nama_paket');
             $table->date('tanggal_kepulangan');
             $table->date('tanggal_keberangkatan');

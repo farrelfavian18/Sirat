@@ -69,26 +69,24 @@ class PaketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Paket $paket)
     {
         $validated = $request->validate([
-            'nama_paket' => 'required|string|max:255',
-            'tanggal_keberangkatan' => 'required|date',
-            'tanggal_kepulangan' => 'required|date',
-            'hotel_madinah' => 'required|string|max:255',
-            'hotel_mekkah' => 'required|string|max:255',
-            'program' => 'required|string|max:255',
-            'harga' => 'required|numeric',
-            'pesawat' => 'required|string|max:255',
-            'total_seat' => 'required|numeric',
-            'jenis_paket' => 'required|boolean',
+            'nama_paket' => 'required',
+            'tanggal_kepulangan' => 'required',
+            'tanggal_keberangkatan' => 'required',
+            'hotel_madinah' => 'required',
+            'hotel_mekkah' => 'required',
+            'program' => 'required',
+            'harga' => 'required',
+            'pesawat' => 'required',
+            'total_seat' => 'required',
+            'jenis_paket' => 'required',
         ]);
 
-        $paket = Paket::findOrFail($id);
-        $paket->update($validated);
+        Paket::where('id', $paket->id)->update($validated);
 
-        return redirect()->route('paket.index')
-            ->with('success', 'Data Paket updated successfully');
+        return redirect()->route('paket.index')->with('success', 'Data Paket updated successfully');
     }
 
     /**
