@@ -32,25 +32,25 @@
                 </tr>
             </thead>
             <tbody>
-                @forelse($pembayarans as $pembayaran)
+                @forelse($pembayarans as $item)
                 <tr>
-                    <td>{{ $pembayaran->id }}</td>
-                    <td>{{ $pembayaran->jamaah->nama_jamaah }}</td>
-                    <td>{{ $pembayaran->tanggal_pembayaran }}</td>
-                    <td>{{ number_format($pembayaran->jumlah_pembayaran, 0, ',', '.') }}</td>
-                    <td>{{ $pembayaran->keterangan }}</td>
-                    <td>{{ $pembayaran->penerima }}</td>
+                    <td>{{ $item->id }}</td>
+                    <td>{{ $item->jamaah->nama_jamaah }}</td>
+                    <td>{{ $item->tanggal_pembayaran }}</td>
+                    <td>{{ number_format($item->jumlah_pembayaran, 0, ',', '.') }}</td>
+                    <td>{{ $item->keterangan }}</td>
+                    <td>{{ $item->penerima }}</td>
                     <td>
-                        @if($pembayaran->bukti_pembayaran)
-                        <a href="{{ asset('storage/' . $pembayaran->bukti_pembayaran) }}" target="_blank">Lihat</a>
+                        @if($item->bukti_pembayaran)
+                        <a href="{{ asset('storage/' . $item->bukti_pembayaran) }}" target="_blank">Lihat</a>
                         @else
                         Tidak Ada
                         @endif
                     </td>
                     <td>
-                        <a href="{{ route('pembayaran.edit', $pembayaran->id) }}"
+                        <a href="{{ route('pembayaran.edit', $item->id) }}"
                             class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('pembayaran.destroy', $pembayaran->id) }}" method="POST"
+                        <form action="{{ route('pembayaran.destroy', $item->id) }}" method="POST"
                             class="d-inline">
                             @csrf
                             @method('DELETE')

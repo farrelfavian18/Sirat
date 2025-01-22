@@ -40,7 +40,7 @@ class JamaahController extends Controller
         $request->validate([
             'id_paket' => 'required|exists:pakets,id',
             'id_perusahaan' => 'required|exists:perusahaans,id',
-            'id_karyawan' => 'nullable|exists:karyawans,id',
+            'id_user' => 'nullable|exists:karyawans,id',
             'nama_jamaah' => 'required|string|max:255',
             'alamat' => 'required|string',
             'kartu_keluarga' => 'nullable|file|mimes:pdf,jpg,jpeg,png',
@@ -59,9 +59,9 @@ class JamaahController extends Controller
                 $data[$fileField] = $request->file($fileField)->store('jamaah_documents', 'public');
             }
         }
-        if ($request->id_karyawan) {
+        if ($request->id_user) {
             $referral = Referral::firstOrCreate(
-                ['id_karyawans' => $request->id_karyawan],
+                ['id_karyawans' => $request->id_user],
                 ['total_referals' => 0]
             );
             $referral->increment('total_referals');

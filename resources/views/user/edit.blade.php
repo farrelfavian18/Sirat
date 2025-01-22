@@ -17,18 +17,15 @@
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
             <select name="role" id="role" class="form-select" required>
-                <option value="admin" {{ $user->role == 'Karyawan Pusat' ? 'selected' : '' }}>Karyawan
-                    Pusat</option>
-                <option value="superadmin" {{ $user->role == 'Pimpinan Cabang' ? 'selected' : '' }}>Pimpinan
-                    Cabang</option>
-                <option value="user" {{ $user->role == 'Karyawan Cabang' ? 'selected' : '' }}>Karyawan
-                    Cabang</option>
+                <option value="admin" {{ $user->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                <option value="superadmin" {{ $user->role == 'superadmin' ? 'selected' : '' }}>Superadmin</option>
+                <option value="user" {{ $user->role == 'user' ? 'selected' : '' }}>User</option>
             </select>
         </div>
         <div class="form-group">
             <label for="cabang_id">Cabang</label>
-            <select class="form-control select2 @error('cabang_id') is-invalid @enderror" style="width: 100%;"
-                name="cabang_id" id="cabang_id">
+            <select class="form-control select2 @error('id_cabang') is-invalid @enderror" style="width: 100%;"
+                name="id_cabang" id="id_cabang">
                 <option value="" selected disabled>Pilih Cabang</option>
                 @foreach ($perusahaan as $item)
                 <option value= "{{ $item->id }}" data-email="{{ $item->cabang_id }}">{{ $item->nama_cabang }}
