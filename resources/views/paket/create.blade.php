@@ -33,7 +33,7 @@
                     <input type="text" class="form-control" id="program" name="program" required>
                 </div>
                 <div class="mb-3">
-                    <label for="harga" class="form-label">Harga</label>
+                    <label for="harga" class="form-label">Harga (Rp.)</label>
                     <input type="number" class="form-control" id="harga" name="harga" required>
                 </div>
                 <div class="mb-3">

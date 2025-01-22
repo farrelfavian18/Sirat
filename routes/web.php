@@ -14,8 +14,12 @@ use App\Http\Controllers\{
     UserController
 };
 
+// Route::get('/', function () {
+//     return view('/auth/register');
+// });
+
 Route::get('/', function () {
-    return view('/auth/register');
+    return view('/auth/login');
 });
 
 Route::get('/notadmin', function () {

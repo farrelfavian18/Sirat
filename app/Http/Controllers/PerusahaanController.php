@@ -131,7 +131,7 @@ class PerusahaanController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Perusahaan $perusahaan, $id)
+    public function destroy($id)
     {
         $perusahaan = Perusahaan::find($id);
 

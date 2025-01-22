@@ -14,8 +14,12 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->unsignedBigInteger('id_cabang');
+            $table->foreign('id_cabang')->references('id')->on('perusahaans')->onDelete('cascade')->onUpdate('cascade')->default(1);
             $table->string('email')->unique();
             $table->enum('role', ['user','admin','superadmin'])->default('user');
+            $table->string('no_wa')->nullable();
+            $table->string('alamat')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();

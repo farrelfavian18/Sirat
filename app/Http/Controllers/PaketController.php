@@ -60,7 +60,7 @@ class PaketController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Paket $paket, $id)
+    public function edit($id)
     {
         $paket = Paket::findOrFail($id);
         return view('paket.edit', compact('paket'));
@@ -69,7 +69,7 @@ class PaketController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Paket $paket ,$id)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
             'nama_paket' => 'required|string|max:255',

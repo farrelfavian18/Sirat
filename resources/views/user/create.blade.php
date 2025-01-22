@@ -11,7 +11,7 @@
         @csrf
         <div class="mb-3">
             <label for="nama" class="form-label">Nama</label>
-            <input type="text" name="nama" class="form-control" id="nama" required>
+            <input type="text" name="name" class="form-control" id="name" required>
         </div>
         <div class="mb-3">
             <label for="role" class="form-label">Role</label>
@@ -22,11 +22,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label for="cabang_id">Cabang</label>
+            <label for="cabang_id">Perusahaan / Cabang</label>
             <select class="form-control select2 @error('cabang_id') is-invalid @enderror" style="width: 100%;"
                 name="cabang_id" id="cabang_id">
                 <option value="" selected disabled>Pilih Cabang</option>
-                @foreach ($cabang as $item)
+                @foreach ($perusahaan as $item)
                 <option value="{{ $item->id }}" data-email="{{ $item->cabang_id }}">{{ $item->nama_cabang }}
                 </option>
                 {{-- <option value="{{ $item->id }}">{{ $item->name }}
@@ -48,10 +48,6 @@
         <div class="mb-3">
             <label for="alamat" class="form-label">Alamat</label>
             <textarea name="alamat" id="alamat" class="form-control"></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="name" class="form-label">Username Akun</label>
-            <input type="text" name="name" class="form-control" id="name" required>
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password Akun</label>

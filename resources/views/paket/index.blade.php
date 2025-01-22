@@ -28,7 +28,7 @@
                     <th>Hotel Madinah</th>
                     <th>Hotel Mekkah</th>
                     <th>Program</th>
-                    <th>Harga</th>
+                    <th>Harga (Rp.)</th>
                     <th>Pesawat</th>
                     <th>Total Seat</th>
                     <th>Terisi</th>

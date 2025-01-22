@@ -7,6 +7,11 @@
         @csrf
         @method('PUT')
         <div class="form-group">
+            <label for="nama_paket">Nama Paket</label>
+            <input type="text" class="form-control" id="nama_paket" name="nama_paket" value="{{ $paket->nama_paket }}"
+                required>
+        </div>
+        <div class="form-group">
             <label for="tanggal_keberangkatan">Tanggal Keberangkatan</label>
             <input type="date" class="form-control" id="tanggal_keberangkatan" name="tanggal_keberangkatan"
                 value="{{ $paket->tanggal_keberangkatan }}" required>
@@ -15,11 +20,6 @@
             <label for="tanggal_kepulangan">Tanggal Kepulangan</label>
             <input type="date" class="form-control" id="tanggal_kepulangan" name="tanggal_kepulangan"
                 value="{{ $paket->tanggal_kepulangan }}" required>
-        </div>
-        <div class="form-group">
-            <label for="nama_paket">Nama Paket</label>
-            <input type="text" class="form-control" id="nama_paket" name="nama_paket" value="{{ $paket->nama_paket }}"
-                required>
         </div>
         <div class="form-group">
             <label for="hotel_madinah">Hotel Madinah</label>
