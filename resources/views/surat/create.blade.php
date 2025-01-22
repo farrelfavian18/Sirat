@@ -10,20 +10,20 @@
     <form action="{{ route('surat.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="mb-3">
-            <label for="id_data_perusahaans" class="form-label">Perusahaan</label>
-            <select name="id_data_perusahaans" id="id_data_perusahaans" class="form-select">
+            <label for="id_perusahaans" class="form-label">Perusahaan</label>
+            <select name="id_perusahaans" id="id_perusahaans" class="form-select">
                 <option value="">Pilih Perusahaan</option>
-                @foreach($perusahaans as $perusahaan)
-                <option value="{{ $perusahaan->id }}">{{ $perusahaan->nama_perusahaan }}</option>
+                @foreach($perusahaan as $perusahaans)
+                <option value="{{ $perusahaans->id }}">{{ $perusahaans->nama_cabang }}</option>
                 @endforeach
             </select>
         </div>
         <div class="mb-3">
-            <label for="id_karyawans" class="form-label">Karyawan</label>
-            <select name="id_karyawans" id="id_karyawans" class="form-select">
+            <label for="id_user" class="form-label">Karyawan</label>
+            <select name="id_user" id="id_user" class="form-select">
                 <option value="">Pilih Karyawan</option>
-                @foreach($karyawans as $karyawan)
-                <option value="{{ $karyawan->id }}">{{ $karyawan->nama_karyawan }}</option>
+                @foreach($user as $users)
+                <option value="{{ $users->id }}">{{ $users->name }}</option>
                 @endforeach
             </select>
         </div>

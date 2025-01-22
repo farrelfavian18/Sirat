@@ -15,7 +15,7 @@ class SuratController extends Controller
      */
     public function index()
     {
-        $surat = Surat::with(['perusahaan', 'karyawan'])->get();
+        $surat = Surat::with(['perusahaan', 'user'])->get();
         return view('surat.index', compact('surat'));
     }
 
@@ -24,9 +24,9 @@ class SuratController extends Controller
      */
     public function create()
     {
-        $perusahaans = Perusahaan::all();
-        $users = User::all();
-        return view('surat.create', compact('perusahaans', 'karyawans'));
+        $perusahaan = Perusahaan::all();
+        $user = User::all();
+        return view('surat.create', compact('perusahaan', 'user'));
     }
 
     /**
@@ -36,8 +36,8 @@ class SuratController extends Controller
     {
         $request->validate([
             
-            'id_perusahaans' => 'nullable|exists:data_perusahaans,id',
-            'id_user' => 'nullable|exists:karyawans,id',
+            'id_perusahaan' => 'nullable|exists:data_perusahaan,id',
+            'id_user' => 'nullable|exists:user,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',
@@ -68,9 +68,9 @@ class SuratController extends Controller
     public function edit(Surat $surat, $id)
     {
         $surat = Surat::findOrFail($id);
-        $perusahaans = Perusahaan::all();
-        $users = User::all();
-        return view('surat.edit', compact('surat', 'perusahaans', 'karyawans'));
+        $perusahaan = Perusahaan::all();
+        $user = User::all();
+        return view('surat.edit', compact('surat', 'perusahaan', 'user'));
     }
 
     /**
@@ -79,8 +79,8 @@ class SuratController extends Controller
     public function update(Request $request, Surat $surat , $id)
     {
         $request->validate([
-            'id_perusahaans' => 'nullable|exists:data_perusahaans,id',
-            'id_users' => 'nullable|exists:karyawans,id',
+            'id_perusahaan' => 'nullable|exists:data_perusahaan,id',
+            'id_user' => 'nullable|exists:user,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'nullable|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',
