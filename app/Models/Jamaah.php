@@ -32,11 +32,11 @@ class Jamaah extends Model
     
     public function pembayarans()
     {
-        return $this->hasMany(Pembayaran::class, 'id_jamaah');
+        return $this->hasMany(Pembayaran::class, 'id_pembayaran');
     }
 
     public function referrals()
     {
-        return $this->hasMany(Referral::class, 'id_jamaah');
+        return $this->hasMany(Referral::class, 'id_referral');
     }
 }

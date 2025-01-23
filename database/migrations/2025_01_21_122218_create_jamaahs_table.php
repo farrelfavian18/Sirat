@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jamaahs', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_paket');
-            $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade')->onUpdate('cascade')->default(1);
+            $table->foreign('id_paket')->references('id')->on('pakets')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_perusahaan');
             $table->foreign('id_perusahaan')->references('id')->on('perusahaans')->onDelete('cascade')->onUpdate('cascade')->default(1);
             // $table->unsignedBigInteger('id_user');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('alamat')->nullable();
             $table->string('kartu_keluarga')->nullable();
             $table->string('ktp')->nullable();
-            $table->integer('no_telpon')->nullable();
+            $table->string('no_telpon')->nullable();
             $table->string('surat_kesehatan')->nullable();
             $table->string('visa')->nullable();
             $table->string('surat_pendukung')->nullable();

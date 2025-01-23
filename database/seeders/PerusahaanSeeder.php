@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Perusahaan;
-use App\Models\User;
+use App\Models\Paket;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -38,6 +38,36 @@ class PerusahaanSeeder extends Seeder
             'pdf_akta_cabang' =>'HAI',
             'created_at' => now(),
             'updated_at' => now()
+        ]);
+
+        Paket::create([
+            'nama_paket' => 'Umroh1',
+            'tanggal_kepulangan'=> '2022-01-21',
+            'tanggal_keberangkatan'=> '2022-01-24',
+            'hotel_madinah'=> 'Madin',
+            'hotel_mekkah'=> 'Madin',
+            'program'=> 'Program Pusat',
+            'harga'=> 10000000,
+            'pesawat'=> 'Garuda',
+            'total_seat'=> 2,
+            'jenis_paket'=> 0,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        Paket::create([
+            'nama_paket' => 'Umroh2',
+            'tanggal_kepulangan'=> '2022-01-21',
+            'tanggal_keberangkatan'=> '2022-01-24',
+            'hotel_madinah'=> 'Mekkah',
+            'hotel_mekkah'=> 'Madinah',
+            'program'=> 'Program Pusat',
+            'harga'=> 20000000,
+            'pesawat'=> 'Garuda',
+            'total_seat'=> 2,
+            'jenis_paket'=> 0,
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

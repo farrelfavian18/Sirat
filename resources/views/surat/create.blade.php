@@ -19,8 +19,8 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="id_user" class="form-label">Karyawan</label>
-            <select name="id_user" id="id_user" class="form-select">
+            <label for="id_users" class="form-label">Karyawan</label>
+            <select name="id_users" id="id_users" class="form-select">
                 <option value="">Pilih Karyawan</option>
                 @foreach($user as $users)
                 <option value="{{ $users->id }}">{{ $users->name }}</option>

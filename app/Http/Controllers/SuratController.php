@@ -15,7 +15,7 @@ class SuratController extends Controller
      */
     public function index()
     {
-        $surat = Surat::with(['perusahaan', 'user'])->get();
+        $surat = Surat::with(['perusahaan', 'users'])->get();
         return view('surat.index', compact('surat'));
     }
 
@@ -34,16 +34,16 @@ class SuratController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        // dd($request);
+        $data=$request->validate([
             
-            'id_perusahaan' => 'nullable|exists:data_perusahaan,id',
-            'id_user' => 'nullable|exists:users,id',
+            'id_perusahaans' => 'required',
+            'id_users' => 'required|exists:users,id',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',
         ]);
-
-        $data = $request->all();
 
         if ($request->hasFile('dokumen_surat')) {
             $data['dokumen_surat'] = $request->file('dokumen_surat')->store('surat_documents', 'public');
