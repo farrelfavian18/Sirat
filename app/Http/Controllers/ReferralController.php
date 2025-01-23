@@ -14,9 +14,22 @@ class ReferralController extends Controller
      */
     public function index()
     {
-        $referral = Referral::with('user','jamaah')->get();
+        $referrals = Referral::with('user','jamaah')->get();
 
-        return view('referral.index', compact('referral'));
+        $groupedReferrals = $referrals->groupBy('id_jamaah')->map(function ($group) {
+            $totalReferals = $group->count(); 
+            $user = $group->first()->user;
+            $jamaah = $group->first()->jamaah;
+    
+            return [
+                'user' => $user,
+                'jamaah' => $jamaah,
+                'total_referals' => $totalReferals,
+                'status' => $group->first()->status,
+            ];
+        });
+
+        return view('referral.index', compact('groupedReferrals'));
     }
 
     /**
@@ -41,19 +54,11 @@ class ReferralController extends Controller
         'status' => 'required|string',
     ]);
 
-    // Tambahkan jamaah baru
     Referral::create([
         'id_user' => $validated['id_user'],
         'id_jamaah' => $validated['id_jamaah'],
         'status' => $validated['status'],
-        'total_referals' => 1, // Default to 1 for a new referral
     ]);
-
-    // Update total_referals untuk karyawan
-    $referral = Referral::where('id_user', $validated['id_user'])->first();
-    if ($referral) {
-        $referral->increment('total_referals');
-    }
 
     return redirect()->route('referral.index')->with('success', 'Referral created successfully.');
     }

@@ -34,8 +34,8 @@
                 @forelse($surat as $item)
                 <tr>
                     <td>{{ $item->id }}</td>
-                    <td>{{ $item->perusahaan->nama_perusahaan ?? 'Tidak ada' }}</td>
-                    <td>{{ $item->karyawan->name ?? 'Tidak ada' }}</td>
+                    <td>{{ $item->perusahaan->nama_cabang ?? 'Tidak ada' }}</td>    
+                    <td>{{ $item->users->name ?? 'Tidak ada' }}</td>
                     <td>{{ $item->keterangan }}</td>
                     <td>
                         @if($item->dokumen_surat)

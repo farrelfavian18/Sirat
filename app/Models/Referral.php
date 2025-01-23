@@ -20,6 +20,6 @@ class Referral extends Model
 
     public function jamaah()
     {
-        return $this->belongsTo(User::class, 'id_jamaah');
+        return $this->belongsTo(Jamaah::class, 'id_jamaah');
     }
 }

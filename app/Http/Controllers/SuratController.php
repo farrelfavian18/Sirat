@@ -35,19 +35,18 @@ class SuratController extends Controller
     public function store(Request $request)
     {
 
-        // dd($request);
         $data=$request->validate([
             
             'id_perusahaans' => 'required',
-            'id_users' => 'required|exists:users,id',
+            'id_users' => 'required',
             'keterangan' => 'required|string',
             'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
             'note' => 'nullable|string',
         ]);
 
-        if ($request->hasFile('dokumen_surat')) {
-            $data['dokumen_surat'] = $request->file('dokumen_surat')->store('surat_documents', 'public');
-        }
+        // if ($request->hasFile('dokumen_surat')) {
+        //     $data['dokumen_surat'] = $request->file('dokumen_surat')->store('surat_documents', 'public');
+        // }
 
         Surat::create($data);
 

@@ -54,5 +54,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }   
+    }
+    
+    public function referrals()
+    {
+        return $this->hasMany(Referral::class, 'id_user');
+    }
 }

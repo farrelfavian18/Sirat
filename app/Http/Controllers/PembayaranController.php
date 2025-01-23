@@ -14,7 +14,7 @@ class PembayaranController extends Controller
      */
     public function index()
     {
-        $pembayarans = Pembayaran::with('jamaahs')->get();
+        $pembayarans = Pembayaran::with('jamaah')->get();
         return view('pembayaran.index', compact('pembayarans'));
     }
 
@@ -104,14 +104,8 @@ class PembayaranController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pembayaran $pembayaran, $id)
+    public function destroy(Pembayaran $pembayaran)
     {
-        $pembayaran = Pembayaran::findOrFail($id);
-
-        if ($pembayaran->bukti_pembayaran && Storage::exists('public/' . $pembayaran->bukti_pembayaran)) {
-            Storage::delete('public/' . $pembayaran->bukti_pembayaran);
-        }
-
         $pembayaran->delete();
 
         return redirect()->route('pembayaran.index')->with('success', 'Pembayaran berhasil dihapus.');

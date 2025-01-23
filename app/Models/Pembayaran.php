@@ -16,7 +16,8 @@ class Pembayaran extends Model
     ];
     
     public function jamaah()
-    {
-        return $this->belongsTo(jamaah::class, 'id_jamaah');
-    }
+{
+    return $this->belongsTo(Jamaah::class, 'id_jamaah');
+}
+
 }

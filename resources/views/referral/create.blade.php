@@ -10,7 +10,7 @@
             <select name="id_user" id="id_user" class="form-control" required>
                 <option value="">-- Pilih Karyawan --</option>
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}">{{ $user->nama }}</option>
+                    <option value="{{ $user->id }}">{{ $user->name }}</option>
                 @endforeach
             </select>
         </div>
@@ -19,7 +19,7 @@
             <select name="id_jamaah" id="id_jamaah" class="form-control" required>
                 <option value="">-- Pilih Jamaah --</option>
                 @foreach($jamaahs as $jamaah)
-                    <option value="{{ $jamaah->id }}">{{ $jamaah->nama }}</option>
+                    <option value="{{ $jamaah->id }}">{{ $jamaah->nama_jamaah }}</option>
                 @endforeach
             </select>
         </div>
