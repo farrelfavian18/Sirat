@@ -8,7 +8,6 @@
         <thead>
             <tr>
                 <th>Nama Karyawan</th>
-                <th>Nama Jamaah</th>
                 <th>Total Referal</th>
                 <th>Status</th>
                 <th>Aksi</th>
@@ -18,7 +17,6 @@
             @forelse($groupedReferrals as $referral)
             <tr>
                 <td>{{ $referral['user']->name ?? 'Tidak ada data' }}</td>
-                <td>{{ $referral['jamaah']->nama_jamaah ?? 'Tidak ada data' }}</td>
                 <td>{{ $referral['total_referals'] }}</td>
                 <td>{{ $referral['status'] }}</td>
                 <td>

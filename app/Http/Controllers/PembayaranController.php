@@ -64,9 +64,8 @@ class PembayaranController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pembayaran $pembayaran, $id)
+    public function edit(Pembayaran $pembayaran)
     {
-        $pembayaran = Pembayaran::findOrFail($id);
         $jamaahs = Jamaah::all();
 
         return view('pembayaran.edit', compact('pembayaran', 'jamaahs'));
@@ -75,7 +74,7 @@ class PembayaranController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pembayaran $pembayaran, $id)
+    public function update(Request $request, Pembayaran $pembayaran)
     {
         $validated = $request->validate([
             'id_jamaahs' => 'required|exists:jamaahs,id',
@@ -86,7 +85,6 @@ class PembayaranController extends Controller
             'bukti_pembayaran' => 'nullable|file|mimes:jpeg,png,pdf|max:2048',
         ]);
 
-        $pembayaran = Pembayaran::findOrFail($id);
 
         // Hapus file lama jika ada file baru yang diupload
         if ($request->hasFile('bukti_pembayaran')) {

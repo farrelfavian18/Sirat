@@ -27,7 +27,7 @@
                     <th>No. Telepon</th>
                     <th>Paket</th>
                     <th>Perusahaan</th>
-                    <th>Code Referral</th>
+                    {{-- <th>Code Referral</th> --}}
                     <th>Dokumen</th>
                     <th>Actions</th>
                 </tr>
@@ -42,7 +42,7 @@
                     <td>{{ $item->paket->nama_paket ? $item->paket->nama_paket : 'Tidak Ada' }}</td>
                     <td>{{ $item->perusahaan->nama_perusahaan ? $item->perusahaan->nama_perusahaan : 'Tidak Ada' }}
                     </td>
-                    <td>{{ $item->code_referals ? $item->code_referals : 'Tidak Ada' }}</td>
+                    {{-- <td>{{ $item->code_referals ? $item->code_referals : 'Tidak Ada' }}</td> --}}
                     <td>
                         @if($item->kartu_keluarga)
                         <p><a href="{{ asset('storage/' . $item->kartu_keluarga) }}" target="_blank">Kartu
