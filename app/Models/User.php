@@ -60,4 +60,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Referral::class, 'id_user');
     }
+
+    public function perusahaan()
+    {
+        return $this->belongsTo(Perusahaan::class, 'id_cabang');
+    }
 }

@@ -14,22 +14,25 @@ class ReferralController extends Controller
      */
     public function index()
     {
-        $referrals = Referral::with('user','jamaah')->get();
+        $referrals = Referral::with('user', 'jamaah')->get();
 
-        $groupedReferrals = $referrals->groupBy('id_jamaah')->map(function ($group) {
-            $totalReferals = $group->count(); 
-            $user = $group->first()->user;
-            $jamaah = $group->first()->jamaah;
-    
+        // Menghitung total referral untuk setiap user berdasarkan user_id
+        $totalReferralsPerUser = $referrals->groupBy('user_id')->mapWithKeys(function ($group, $userId) {
+            return [$userId => $group->count()]; // Hitung jumlah referral untuk setiap user
+        });
+
+        // Pastikan setiap referral tetap memiliki data lengkap dan total referral untuk usernya
+        $groupedReferrals = $referrals->map(function ($referral) use ($totalReferralsPerUser) {
             return [
-                'user' => $user,
-                'jamaah' => $jamaah,
-                'total_referals' => $totalReferals,
-                'status' => $group->first()->status,
+                'id_referral' => $referral->id, // ID referral unik
+                'user' => $referral->user, // Informasi user
+                'jamaah' => $referral->jamaah, // Informasi jamaah
+                'total_referrals' => $totalReferralsPerUser[$referral->user_id] ?? 0, // Total referral user ini
+                'status' => $referral->status, // Status referral
             ];
         });
 
-        return view('referral.index', compact('groupedReferrals'));
+        return view('referral.index', compact('referrals', 'groupedReferrals'));
     }
 
     /**
@@ -48,19 +51,19 @@ class ReferralController extends Controller
      */
     public function store(Request $request)
     {
-    $validated = $request->validate([
-        'id_user' => 'required',
-        'id_jamaah' => 'required',
-        'status' => 'required|string',
-    ]);
+        $validated = $request->validate([
+            'id_user' => 'required',
+            'id_jamaah' => 'required',
+            'status' => 'required|string',
+        ]);
 
-    Referral::create([
-        'id_user' => $validated['id_user'],
-        'id_jamaah' => $validated['id_jamaah'],
-        'status' => $validated['status'],
-    ]);
+        Referral::create([
+            'id_user' => $validated['id_user'],
+            'id_jamaah' => $validated['id_jamaah'],
+            'status' => $validated['status'],
+        ]);
 
-    return redirect()->route('referral.index')->with('success', 'Referral created successfully.');
+        return redirect()->route('referral.index')->with('success', 'Referral created successfully.');
     }
 
     /**
@@ -88,30 +91,30 @@ class ReferralController extends Controller
      */
     public function update(Request $request, Referral $referral)
     {
-    $validated = $request->validate([
-        'id_user' => 'required',
-        'id_jamaah' => 'required',
-        'status' => 'required|string',
-    ]);
+        $validated = $request->validate([
+            'id_user' => 'required',
+            'id_jamaah' => 'required',
+            'status' => 'required|string',
+        ]);
 
-    // Periksa apakah id_user berubah
-    if ($referral->id_user !== $validated['id_user']) {
-        // Kurangi total referal dari karyawan lama
-        $oldReferral = Referral::where('id_user', $referral->id_user)->first();
-        if ($oldReferral) {
-            $oldReferral->decrement('total_referals');
+        // Periksa apakah id_user berubah
+        if ($referral->id_user !== $validated['id_user']) {
+            // Kurangi total referal dari karyawan lama
+            $oldReferral = Referral::where('id_user', $referral->id_user)->first();
+            if ($oldReferral) {
+                $oldReferral->decrement('total_referals');
+            }
+
+            // Tambahkan total referal ke karyawan baru
+            $newReferral = Referral::where('id_user', $validated['id_user'])->first();
+            if ($newReferral) {
+                $newReferral->increment('total_referals');
+            }
         }
 
-        // Tambahkan total referal ke karyawan baru
-        $newReferral = Referral::where('id_user', $validated['id_user'])->first();
-        if ($newReferral) {
-            $newReferral->increment('total_referals');
-        }
-    }
+        $referral->update($validated);
 
-    $referral->update($validated);
-
-    return redirect()->route('referral.index')->with('success', 'Referral updated successfully.');
+        return redirect()->route('referral.index')->with('success', 'Referral updated successfully.');
     }
 
 
@@ -120,15 +123,8 @@ class ReferralController extends Controller
      */
     public function destroy(Referral $referral)
     {
-    // Kurangi total referals pada karyawan
-    $existingReferral = Referral::where('id_user', $referral->id_user)->first();
-    if ($existingReferral) {
-        $existingReferral->decrement('total_referals');
+        $referral->delete();
+
+        return redirect()->route('referral.index')->with('success', 'Referral deleted successfully.');
     }
-
-    $referral->delete();
-
-    return redirect()->route('referral.index')->with('success', 'Referral deleted successfully.');
-    }
-
 }

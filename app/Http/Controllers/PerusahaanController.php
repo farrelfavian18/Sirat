@@ -34,10 +34,10 @@ class PerusahaanController extends Controller
             'nama_cabang' => 'required',
             'kota_kabupaten' => 'required',
             'alamat' => 'required',
-            'nama_pimpinan' => 'required', 
+            'nama_pimpinan' => 'required',
             'nib_cabang' => 'required',
-            'pdf_nib' => 'required|file|mimes:pdf|max:2048',
-            'pdf_akta_cabang' => 'required|file|mimes:pdf|max:2048',
+            'pdf_nib' => 'required|file||max:2048',
+            'pdf_akta_cabang' => 'required|file|max:2048',
         ]);
 
         $data = $request->all();
@@ -93,7 +93,7 @@ class PerusahaanController extends Controller
             'nama_cabang' => 'required',
             'kota_kabupaten' => 'required',
             'alamat' => 'required',
-            'nama_pimpinan' => 'required', 
+            'nama_pimpinan' => 'required',
             'nib_cabang' => 'required',
             'pdf_nib' => 'nullable|file|mimes:pdf|max:2048',
             'pdf_akta_cabang' => 'nullable|file|mimes:pdf|max:2048',

@@ -18,7 +18,7 @@ class Perusahaan extends Model
 
     public function users()
     {
-        return $this->hasMany(User::class, 'cabang_id');
+        return $this->hasMany(User::class, 'id_cabang');
         // return $this->hasOne(Karyawan::class, 'cabang_id','id');
     }
 

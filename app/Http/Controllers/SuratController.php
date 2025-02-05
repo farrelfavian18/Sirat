@@ -36,11 +36,11 @@ class SuratController extends Controller
     {
 
         $data=$request->validate([
-            
+
             'id_perusahaans' => 'required',
             'id_users' => 'required',
             'keterangan' => 'required|string',
-            'dokumen_surat' => 'required|file|mimes:pdf,doc,docx|max:2048',
+            'dokumen_surat' => 'required',
             'note' => 'nullable|string',
         ]);
 

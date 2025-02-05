@@ -17,7 +17,8 @@ class JamaahController extends Controller
      */
     public function index()
     {
-        $jamaah = Jamaah::with(['paket', 'perusahaan'])->get();
+        $user = auth()->user();
+        $jamaah = Jamaah::with(['paket', 'perusahaan'])->where('id_perusahaan',$user->id_cabang)->get();
         return view('jamaah.index', compact('jamaah'));
     }
 
@@ -77,7 +78,8 @@ class JamaahController extends Controller
      */
     public function show(Jamaah $jamaah, $id)
     {
-        $jamaah = Jamaah::find($id);
+        $user = auth()->user();
+        $jamaah = Jamaah::find($id)->where('id_perusahaan',$user->id_cabang)->first();
 
         if (!$jamaah) {
             return redirect()->route('jamaah.index')->with('error', 'Data tidak ditemukan.');
@@ -87,15 +89,22 @@ class JamaahController extends Controller
     }
     public function edit($id)
     {
-        $jamaah = Jamaah::findOrFail($id);
+        $user = auth()->user();
+        $jamaah = Jamaah::findOrFail($id)->where('id_perusahaan',$user->id_cabang)->first();
+        if (!$jamaah) {
+            return redirect()->route('jamaah.index')->with('error', 'Data tidak ditemukan.');
+        }
         $pakets = Paket::all();
         $perusahaans = Perusahaan::all();
-        $users = User::all();
+        // $users = User::all();
         return view('jamaah.edit', compact('jamaah', 'pakets', 'perusahaans', 'users'));
     }
 
 public function update(Request $request, $id)
 {
+    $user = auth()->user();
+    $jamaah = Jamaah::findOrFail($id)->where('id_perusahaan',$user->id_cabang)->first();
+
     $request->validate([
         'id_paket' => 'required',
         'id_perusahaan' => 'required',
@@ -139,7 +148,8 @@ public function update(Request $request, $id)
      */
     public function destroy($id)
     {
-        $jamaah = Jamaah::find($id);
+        $user = auth()->user();
+        $jamaah = Jamaah::find($id)->where('id_perusahaan',$user->id_cabang)->first();
 
         if (!$jamaah) {
             return redirect()->route('jamaah.index')->with('error', 'Data tidak ditemukan.');
@@ -149,7 +159,10 @@ public function update(Request $request, $id)
 
         return redirect()->route('jamaah.index')->with('success', 'Data Jamaah berhasil dihapus.');
     }
-
+    // public function __construct()
+    // {
+    // $this->middleware('auth');
+    // }
 
 
 

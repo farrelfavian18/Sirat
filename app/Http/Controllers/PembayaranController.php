@@ -77,14 +77,13 @@ class PembayaranController extends Controller
     public function update(Request $request, Pembayaran $pembayaran)
     {
         $validated = $request->validate([
-            'id_jamaahs' => 'required|exists:jamaahs,id',
+            'id_jamaah' => 'required',
             'tanggal_pembayaran' => 'required|date',
             'jumlah_pembayaran' => 'required|integer|min:0',
             'keterangan' => 'required|string',
             'penerima' => 'required|string',
-            'bukti_pembayaran' => 'nullable|file|mimes:jpeg,png,pdf|max:2048',
+            'bukti_pembayaran' => 'nullable',
         ]);
-
 
         // Hapus file lama jika ada file baru yang diupload
         if ($request->hasFile('bukti_pembayaran')) {

@@ -40,7 +40,7 @@ class FasilitasController extends Controller
             'keterangan' => 'nullable|array',
             'keterangan.*' => 'nullable|string|max:255',
         ]);
-    
+
         try {
             foreach ($validatedData['peralatan'] as $index => $peralatan) {
                 Fasilitas::create([
@@ -49,7 +49,7 @@ class FasilitasController extends Controller
                     'keterangan' => $validatedData['keterangan'][$index] ?? null,
                 ]);
             }
-    
+
             return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil ditambahkan.');
         } catch (\Exception $e) {
             return back()->withErrors(['error' => $e->getMessage()]);
@@ -84,13 +84,12 @@ class FasilitasController extends Controller
     public function update(Request $request, Fasilitas $fasilitas)
     {
         $validated = $request->validate([
-            'id_paket' => 'required|exists:pakets,id',
+            'id_paket' => 'required',
             'peralatan' => 'required|string|max:255',
             'keterangan' => 'nullable|string|max:255',
         ]);
 
-
-        Fasilitas::where('id', $fasilitas->id)->update($validated);
+        Fasilitas::where('id_paket', $request->id_paket)->update($validated);
 
 
         return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil diperbarui.');
@@ -99,11 +98,10 @@ class FasilitasController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fasilitas $fasilitas)
+    public function destroy(String $fasilitas)
     {
-        $fasilitas = Fasilitas::findOrFail($fasilitas);
-        $fasilitas->delete();
-
+        $item = Fasilitas::findOrFail($fasilitas);
+        $item->delete();
         return redirect()->route('fasilitas.index')->with('success', 'Fasilitas berhasil dihapus.');
     }
 }
